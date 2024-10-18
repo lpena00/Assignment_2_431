@@ -4,6 +4,19 @@
 
 (* Problem 3 Solution *)
 
+let rec reverse list = 
+    match list with
+    | [] -> []
+    | hd :: tl -> reverse (tl) @ [hd] ;;
+
+let reverse_tr list = 
+    let rec helper list olist = 
+        match list with
+        | [] -> olist
+        | hd :: tl -> helper tl olist @ [hd]
+    in
+    helper list [];;
+
 (* Problem 4 Solution *)
 
 (* Problem 5 Solution *)
