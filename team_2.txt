@@ -23,6 +23,12 @@ let reverse_tr list =
 
 (* Problem 6 Solution *)
 
+let rec preOrderList tree = 
+    match tree with
+    | Empty -> []
+    | Leaf x -> [x]
+    | Node (x,bl,br) -> x :: preOrderList bl @ preOrderList br;;
+
 Problem 7 Solution
 
 Problem 8 Solution
