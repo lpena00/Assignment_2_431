@@ -4,11 +4,30 @@
 
 (* Problem 3 Solution *)
 
+let rec reverse list = 
+    match list with
+    | [] -> []
+    | hd :: tl -> reverse (tl) @ [hd] ;;
+
+let reverse_tr list = 
+    let rec helper list olist = 
+        match list with
+        | [] -> olist
+        | hd :: tl -> helper tl olist @ [hd]
+    in
+    helper list [];;
+
 (* Problem 4 Solution *)
 
 (* Problem 5 Solution *)
 
 (* Problem 6 Solution *)
+
+let rec preOrderList tree = 
+    match tree with
+    | Empty -> []
+    | Leaf x -> [x]
+    | Node (x,bl,br) -> x :: preOrderList bl @ preOrderList br;;
 
 Problem 7 Solution
 
@@ -22,10 +41,20 @@ Problem 10 Solution
 
 {- Problem 12 Solution -}
 
+divisors :: Int -> [Int]
+divisors n = [x | x <- [1..n], n `mod` x == 0]
+
 {- Problem 13 Solution -}
+
+isPrime :: Int -> Bool
+isPrime n = divisors n == [1,n]
 
 {- Problem 14 Solution -}
 
+let primes = [x | x <- [1..], isPrime x]
+
 {- Problem 15 Solution -}
+
+print(show(primes !! 2000))
 
 {- Problem 16 Solution -}
