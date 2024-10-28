@@ -1,5 +1,18 @@
 (* Problem 1 Solution *)
+(* non tail recursive *)
+let rec replicate_non_tail x n =
+  if n < 0 then raise (Failure "Negative input")
+  else if n = 0 then []
+  else x :: replicate_non_tail x (n - 1)
 
+(* Tail recursive *)
+
+let replicate_tail x n acc =
+  if n < 0 then raise (Failure "Negative input")
+  else if n = 0 then acc
+  else replicate_tail x (n - 1) (x :: acc)
+  
+let replicate x n = replicate_tail x n []
 (* Problem 2 Solution *)
 
 (* Problem 3 Solution *)
@@ -18,6 +31,14 @@ let reverse_tr list =
     helper list [];;
 
 (* Problem 4 Solution *)
+type 'a tree =
+  | Leaf
+  | Node of 'a * 'a tree * 'a tree
+  
+let rec count_leaves = function
+  | Leaf -> 1
+  | Node (_, left, right) -> count_leaves left + count_leaves right
+
 
 (* Problem 5 Solution *)
 
@@ -31,13 +52,56 @@ let rec preOrderList tree =
 
 Problem 7 Solution
 
+Given expression: (λt. λu. u t) (λx. x) t
+
+Apply β-reduction to the innermost application:
+
+(λu. u t) [λx. x/t] t
+
+then simplify to:
+
+(λu. u (λx. x)) t
+
+now apply β-reduction to outermost application:
+
+t (λx. x)
+
+expression cannot be reduced further.
+
 Problem 8 Solution
 
 Problem 9 Solution
 
 Problem 10 Solution
 
+Given expression: (λz. z t) (λz. (λt. t z) (λx. z x))
+
+Apply β-reduction to the outermost application:
+
+(λz. z t) [λz. (λt. t z) (λx. z x)/z] t
+
+then simplify to:
+
+(λz. z t) (λt. t (λx. z x))
+
+now apply β-reduction to outermost application again:
+
+(λt. t (λx. z x)) [λz. z t/z] t
+
+then simplify to:
+
+(λt. t (λx. (λz. z t) x)) t
+
+now apply β-reduction to outermost application one more time:
+
+t (λx. (λz. z t) x)
+
+expression cannot be reduced further.
+
 {- Problem 11 Solution -}
+
+myFunction :: Int -> [Int]
+myFunction n = [1..n]
 
 {- Problem 12 Solution -}
 
